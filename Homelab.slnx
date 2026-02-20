@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Homelab.Common/Homelab.Common.csproj" />
+    <Project Path="src/Homelab.MQTT.Abstraction/Homelab.MQTT.Abstraction.csproj" />
+    <Project Path="src/Homelab.MQTT.Core/Homelab.MQTT.Core.csproj" />
+  </Folder>
+</Solution>
