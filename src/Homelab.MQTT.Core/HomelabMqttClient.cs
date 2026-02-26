@@ -87,16 +87,17 @@ internal class HomelabMqttClient
 
             try
             {
-                var parsedContent = JsonSerializer.Deserialize<T>(content);
+                var options = GetJsonSerializerOptions();
+                var parsedContent = JsonSerializer.Deserialize<T>(content, options);
                 if (parsedContent is null)
                 {
                     return;
                 }
                 await handler(parsedContent);
             }
-            catch (JsonException)
+            catch (JsonException exception)
             {
-                _logger.LogError("{Class}: Failed to deserialize message payload.", nameof(HomelabMqttClient));
+                _logger.LogError(exception, "{Class}: Failed to deserialize message payload.", nameof(HomelabMqttClient));
             }
         };
 
@@ -109,7 +110,7 @@ internal class HomelabMqttClient
     {
         await EnsureClientConnection();
         
-        var payloadAsString = payload as string ?? JsonSerializer.Serialize(payload);
+        var payloadAsString = payload as string ?? JsonSerializer.Serialize(payload, GetJsonSerializerOptions());
         
         var applicationMessage = new MqttApplicationMessageBuilder()
             .WithTopic(topic)
@@ -160,4 +161,26 @@ internal class HomelabMqttClient
         .WithCleanSession(false)
         .WithSessionExpiryInterval(options.SessionExpiryIntervalInSeconds)
         .Build();
+    
+    private static JsonSerializerOptions? JsonSerializerOptions;
+    private JsonSerializerOptions GetJsonSerializerOptions()
+    {
+        if (JsonSerializerOptions is not null)
+        {
+            return JsonSerializerOptions;
+        }
+        
+        var jsonNamingPolicy = _mqttOptions.MessageJsonNamingPolicy switch
+        {
+            nameof(JsonNamingPolicy.CamelCase) => JsonNamingPolicy.CamelCase,
+            nameof(JsonNamingPolicy.KebabCaseLower) => JsonNamingPolicy.KebabCaseLower,
+            nameof(JsonNamingPolicy.KebabCaseUpper) => JsonNamingPolicy.KebabCaseUpper,
+            nameof(JsonNamingPolicy.SnakeCaseLower) => JsonNamingPolicy.SnakeCaseLower,
+            nameof(JsonNamingPolicy.SnakeCaseUpper) => JsonNamingPolicy.SnakeCaseUpper,
+            _ => throw new ArgumentOutOfRangeException(nameof(_mqttOptions.MessageJsonNamingPolicy))
+        };
+
+        JsonSerializerOptions = new JsonSerializerOptions { PropertyNamingPolicy = jsonNamingPolicy };
+        return JsonSerializerOptions;
+    }
 }

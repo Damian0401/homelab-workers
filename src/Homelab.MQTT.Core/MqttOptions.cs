@@ -10,4 +10,5 @@ public record MqttOptions
     public required string Password { get; init; }
     public required string ClientId { get; init; }
     public required uint SessionExpiryIntervalInSeconds { get; init; }
+    public required string MessageJsonNamingPolicy { get; init; }
 }

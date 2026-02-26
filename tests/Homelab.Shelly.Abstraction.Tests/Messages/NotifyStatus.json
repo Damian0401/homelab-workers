@@ -1,0 +1,11 @@
+{
+  "src": "shellyhtg3-<anonymized>",
+  "dst": "shellyhtg3-<anonymized>/events",
+  "method": "NotifyStatus",
+  "params": {
+    "ts": 1771974786.30,
+    "mqtt": {
+      "connected": true
+    }
+  }
+}

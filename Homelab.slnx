@@ -3,5 +3,9 @@
     <Project Path="src/Homelab.Common/Homelab.Common.csproj" />
     <Project Path="src/Homelab.MQTT.Abstraction/Homelab.MQTT.Abstraction.csproj" />
     <Project Path="src/Homelab.MQTT.Core/Homelab.MQTT.Core.csproj" />
+    <Project Path="src/Homelab.Shelly.Abstraction/Homelab.Shelly.Abstraction.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Homelab.Shelly.Abstraction.Tests/Homelab.Shelly.Abstraction.Tests.csproj" />
   </Folder>
 </Solution>

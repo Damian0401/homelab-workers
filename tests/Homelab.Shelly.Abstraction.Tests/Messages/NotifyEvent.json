@@ -1,0 +1,15 @@
+{
+  "src": "shellyhtg3-<anonymized>",
+  "dst": "shellyhtg3-<anonymized>/events",
+  "method": "NotifyEvent",
+  "params": {
+    "ts": 1771974788.40,
+    "events": [
+      {
+        "component": "sys",
+        "event": "sleep",
+        "ts": 1771974788.40
+      }
+    ]
+  }
+}
