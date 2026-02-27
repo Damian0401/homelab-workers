@@ -2,9 +2,9 @@ using System.Text.Json;
 
 using Homelab.Shelly.Abstraction.Messages;
 
-namespace Homelab.Shelly.Abstraction.Tests;
+namespace Homelab.Shelly.Abstraction.UnitTests.Tests.Messages;
 
-public class DeserializationTests
+public class ShellyMessageTests
 {
     private readonly JsonSerializerOptions _options = new()
     {
@@ -13,10 +13,10 @@ public class DeserializationTests
     };
     
     [Fact]
-    public void NotifyEvent_WhenDeserialized_ShouldHaveCorrectValues()
+    public void FromJsonPayload_WhenDeserializedNotifyEvent_ShouldHaveCorrectValues()
     {
         // Arrange
-        var content = File.ReadAllText("./Messages/NotifyEvent.json");
+        var content = File.ReadAllText("./Data/NotifyEvent.json");
         var expected = new ShellyMessage<ShellyNotifyEventParams>
         {
             Src = "shellyhtg3-<anonymized>",
@@ -39,19 +39,20 @@ public class DeserializationTests
 
         
         // Act
-        var message = JsonSerializer.Deserialize<ShellyMessage<ShellyNotifyEventParams>>(
+        var message = JsonSerializer.Deserialize<ShellyMessage<JsonElement>>(
             content,
             _options);
+        var typedMessage = ShellyMessage<ShellyNotifyEventParams>.FromJsonPayload(message!);
         
         // Assert
-        Assert.Equivalent(expected, message);
+        Assert.Equivalent(expected, typedMessage);
     }
     
     [Fact]
-    public void NotifyStatus_WhenDeserialized_ShouldHaveCorrectValues()
+    public void FromJsonPayload_WhenDeserializedNotifyStatus_ShouldHaveCorrectValues()
     {
         // Arrange
-        var content = File.ReadAllText("./Messages/NotifyStatus.json");
+        var content = File.ReadAllText("./Data/NotifyStatus.json");
         var expected = new ShellyMessage<ShellyNotifyStatusParams>
         {
             Src = "shellyhtg3-<anonymized>",
@@ -69,19 +70,20 @@ public class DeserializationTests
 
         
         // Act
-        var message = JsonSerializer.Deserialize<ShellyMessage<ShellyNotifyStatusParams>>(
+        var message = JsonSerializer.Deserialize<ShellyMessage<JsonElement>>(
             content,
             _options);
+        var typedMessage = ShellyMessage<ShellyNotifyStatusParams>.FromJsonPayload(message!);
         
         // Assert
-        Assert.Equivalent(expected, message);
+        Assert.Equivalent(expected, typedMessage);
     }
 
     [Fact]
-    public void NotifyFullStatus_WhenDeserialized_ShouldHaveCorrectValues()
+    public void FromJsonPayload_WhenDeserializedNotifyFullStatus_ShouldHaveCorrectValues()
     {
         // Arrange
-        var content = File.ReadAllText("./Messages/NotifyFullStatus.json");
+        var content = File.ReadAllText("./Data/NotifyFullStatus.json");
         var expected = new ShellyMessage<ShellyNotifyFullStatusParams>
         {
             Src = "shellyhtg3-<anonymized>",
@@ -147,11 +149,12 @@ public class DeserializationTests
 
         
         // Act
-        var message = JsonSerializer.Deserialize<ShellyMessage<ShellyNotifyFullStatusParams>>(
+        var message = JsonSerializer.Deserialize<ShellyMessage<JsonElement>>(
             content,
             _options);
+        var typedMessage = ShellyMessage<ShellyNotifyFullStatusParams>.FromJsonPayload(message!);
         
         // Assert
-        Assert.Equivalent(expected, message);
+        Assert.Equivalent(expected, typedMessage);
     }
 }

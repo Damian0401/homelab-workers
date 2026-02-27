@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <RootNamespace>Homelab.Shelly.Abstraction.UnitTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,13 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Messages\NotifyFullStatus.json">
+    <None Update="Data\NotifyEvent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Messages\NotifyStatus.json">
+    <None Update="Data\NotifyFullStatus.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Messages\NotifyEvent.json">
+    <None Update="Data\NotifyStatus.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

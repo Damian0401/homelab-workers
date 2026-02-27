@@ -6,6 +6,6 @@
     <Project Path="src/Homelab.Shelly.Abstraction/Homelab.Shelly.Abstraction.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Homelab.Shelly.Abstraction.Tests/Homelab.Shelly.Abstraction.Tests.csproj" />
+    <Project Path="tests\Homelab.Shelly.Abstraction.UnitTests\Homelab.Shelly.Abstraction.UnitTests.csproj" />
   </Folder>
 </Solution>
