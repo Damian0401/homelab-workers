@@ -1,6 +1,8 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Homelab.Common/Homelab.Common.csproj" />
+    <Project Path="src/Homelab.InfluxDb.Abstraction/Homelab.InfluxDb.Abstraction.csproj" />
+    <Project Path="src/Homelab.InfluxDb.Core/Homelab.InfluxDb.Core.csproj" />
     <Project Path="src/Homelab.MQTT.Abstraction/Homelab.MQTT.Abstraction.csproj" />
     <Project Path="src/Homelab.MQTT.Core/Homelab.MQTT.Core.csproj" />
     <Project Path="src/Homelab.Shelly.Abstraction/Homelab.Shelly.Abstraction.csproj" />
