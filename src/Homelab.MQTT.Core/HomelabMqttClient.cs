@@ -11,7 +11,7 @@ internal class HomelabMqttClient
     : IHomelabMqttClient
 {
     private readonly IMqttClient _mqttClient;
-    private readonly MqttOptions _mqttOptions;
+    private readonly HomelabMqttOptions _homelabMqttOptions;
     private readonly ILogger<HomelabMqttClient> _logger;
     
     private readonly ConcurrentBag<string> _topics = new();
@@ -19,11 +19,11 @@ internal class HomelabMqttClient
 
     public HomelabMqttClient(
         IMqttClient mqttClient,
-        MqttOptions mqttOptions,
+        HomelabMqttOptions homelabMqttOptions,
         ILogger<HomelabMqttClient> logger)
     {
         _mqttClient = mqttClient;
-        _mqttOptions = mqttOptions;
+        _homelabMqttOptions = homelabMqttOptions;
         _logger = logger;
         
         _mqttClient.DisconnectedAsync += e =>
@@ -144,7 +144,7 @@ internal class HomelabMqttClient
                 return;
             }
         
-            var connectOptions = BuildConnectOptions(_mqttOptions);
+            var connectOptions = BuildConnectOptions(_homelabMqttOptions);
             await _mqttClient.ConnectAsync(connectOptions);
         }
         finally
@@ -153,7 +153,7 @@ internal class HomelabMqttClient
         }
     }
     
-    private MqttClientOptions BuildConnectOptions(MqttOptions options) => new MqttClientOptionsBuilder()
+    private MqttClientOptions BuildConnectOptions(HomelabMqttOptions options) => new MqttClientOptionsBuilder()
         .WithTcpServer(options.Host, options.Port)
         .WithCredentials(options.Username, options.Password)
         .WithClientId(options.ClientId)
@@ -170,14 +170,14 @@ internal class HomelabMqttClient
             return JsonSerializerOptions;
         }
         
-        var jsonNamingPolicy = _mqttOptions.MessageJsonNamingPolicy switch
+        var jsonNamingPolicy = _homelabMqttOptions.MessageJsonNamingPolicy switch
         {
             nameof(JsonNamingPolicy.CamelCase) => JsonNamingPolicy.CamelCase,
             nameof(JsonNamingPolicy.KebabCaseLower) => JsonNamingPolicy.KebabCaseLower,
             nameof(JsonNamingPolicy.KebabCaseUpper) => JsonNamingPolicy.KebabCaseUpper,
             nameof(JsonNamingPolicy.SnakeCaseLower) => JsonNamingPolicy.SnakeCaseLower,
             nameof(JsonNamingPolicy.SnakeCaseUpper) => JsonNamingPolicy.SnakeCaseUpper,
-            _ => throw new ArgumentOutOfRangeException(nameof(_mqttOptions.MessageJsonNamingPolicy))
+            _ => throw new ArgumentOutOfRangeException(nameof(_homelabMqttOptions.MessageJsonNamingPolicy))
         };
 
         JsonSerializerOptions = new JsonSerializerOptions { PropertyNamingPolicy = jsonNamingPolicy };

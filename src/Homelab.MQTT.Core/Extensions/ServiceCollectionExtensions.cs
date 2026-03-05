@@ -10,7 +10,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddHomelabMqtt(this IServiceCollection services)
     {
-        services.AddOptions<MqttOptions>().BindConfiguration(MqttOptions.SectionName);
+        services.AddOptions<HomelabMqttOptions>().BindConfiguration(HomelabMqttOptions.SectionName);
         services.TryAddSingleton<MqttClientFactory>();
         services.TryAddSingleton<IHomelabMqttClientFactory, HomelabMqttClientFactory>();
         

@@ -1,6 +1,6 @@
 namespace Homelab.MQTT.Core;
 
-public record MqttOptions
+internal record HomelabMqttOptions
 {
     public const string SectionName = "Mqtt";
     

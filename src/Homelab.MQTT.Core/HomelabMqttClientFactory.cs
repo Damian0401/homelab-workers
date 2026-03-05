@@ -7,7 +7,7 @@ namespace Homelab.MQTT.Core;
 
 internal class HomelabMqttClientFactory(
     MqttClientFactory factory,
-    IOptions<MqttOptions> options,
+    IOptions<HomelabMqttOptions> options,
     ILogger<HomelabMqttClient> logger) 
     : IHomelabMqttClientFactory
 {
