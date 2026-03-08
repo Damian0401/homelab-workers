@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Homelab.Workers.Abstraction\Homelab.Workers.Abstraction.csproj" />
+      <ProjectReference Include="..\Homelab.Common\Homelab.Common.csproj" />
+      <ProjectReference Include="..\Homelab.InfluxDb.Abstraction\Homelab.InfluxDb.Abstraction.csproj" />
+      <ProjectReference Include="..\Homelab.Shelly.Abstraction\Homelab.Shelly.Abstraction.csproj" />
+    </ItemGroup>
+
+</Project>
