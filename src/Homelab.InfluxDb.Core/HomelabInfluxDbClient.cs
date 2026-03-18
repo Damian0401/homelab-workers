@@ -25,7 +25,7 @@ internal class HomelabInfluxDbClient(
 
         foreach (var (key, value) in saveOptions.Fields)
         {
-            point = point.Field(key, value.ToString());
+            point = point.Field(key, value);
         }
 
         if (saveOptions.Tags is not null)
