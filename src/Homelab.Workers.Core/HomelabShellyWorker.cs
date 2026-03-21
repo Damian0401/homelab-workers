@@ -60,13 +60,13 @@ public class HomelabShellyWorker(
         
         await influxDbClient.SaveDataAsync(new HomelabInfluxDbSaveOptions
         {
-            Bucket = HomelabSensors.Bucket,
+            Bucket = options.Value.InfluxDbBucket,
             Fields = new Dictionary<string, object>
             {
-                [HomelabSensors.Measurements.Environment.Fields.TemperatureC] = data.TemperatureC,
-                [HomelabSensors.Measurements.Environment.Fields.RelativeHumidity] = data.RelativeHumidity,
+                [HomelabMeasurements.Environment.Fields.TemperatureC] = data.TemperatureC,
+                [HomelabMeasurements.Environment.Fields.RelativeHumidity] = data.RelativeHumidity,
             },
-            Measurement = HomelabSensors.Measurements.Environment.Name,
+            Measurement = HomelabMeasurements.Environment.Name,
             Tags = tags,
             Timestamp = data.Timestamp
         });
@@ -87,14 +87,14 @@ public class HomelabShellyWorker(
 
         await influxDbClient.SaveDataAsync(new HomelabInfluxDbSaveOptions
         {
-            Bucket = HomelabSensors.Bucket,
+            Bucket = options.Value.InfluxDbBucket,
             Fields = new Dictionary<string, object>
             {
-                [HomelabSensors.Measurements.Telemetry.Fields.BatteryPercent] = data.BatteryPercent,
-                [HomelabSensors.Measurements.Telemetry.Fields.BatteryVoltage] = data.BatteryVoltage,
-                [HomelabSensors.Measurements.Telemetry.Fields.WifiRssi] = data.WifiRssi 
+                [HomelabMeasurements.Telemetry.Fields.BatteryPercent] = data.BatteryPercent,
+                [HomelabMeasurements.Telemetry.Fields.BatteryVoltage] = data.BatteryVoltage,
+                [HomelabMeasurements.Telemetry.Fields.WifiRssi] = data.WifiRssi 
             },
-            Measurement = HomelabSensors.Measurements.Telemetry.Name,
+            Measurement = HomelabMeasurements.Telemetry.Name,
             Tags = tags,
             Timestamp = data.Timestamp
         });

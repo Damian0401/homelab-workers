@@ -1,32 +1,27 @@
 namespace Homelab.Workers.Core.Constants;
 
-public static class HomelabSensors
+public static class HomelabMeasurements
 {
-    public const string Bucket = "sensors";
-
-    public static class Measurements
+    public static class Environment
     {
-        public static class Environment
-        {
-            public const string Name = "environment";
+        public const string Name = "environment";
 
-            public static class Fields
-            {
-                public const string TemperatureC = "temperature_c";
-                public const string RelativeHumidity = "relative_humidity";
-            }
-        }
-            
-        public static class Telemetry
+        public static class Fields
         {
-            public const string Name = "telemetry";
-                
-            public static class Fields
-            {
-                public const string BatteryPercent = "battery_percent";
-                public const string BatteryVoltage = "battery_voltage";
-                public const string WifiRssi = "wifi_rssi";
-            }
+            public const string TemperatureC = "temperature_c";
+            public const string RelativeHumidity = "relative_humidity";
+        }
+    }
+        
+    public static class Telemetry
+    {
+        public const string Name = "telemetry";
+            
+        public static class Fields
+        {
+            public const string BatteryPercent = "battery_percent";
+            public const string BatteryVoltage = "battery_voltage";
+            public const string WifiRssi = "wifi_rssi";
         }
     }
 }
